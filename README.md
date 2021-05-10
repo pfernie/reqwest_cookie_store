@@ -3,12 +3,11 @@
 `reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [https://crates.io/crates/cookie_store](cookie_store) 
 
 # Example
-The following example demonstrates loading a [`cookie_store::CookieStore`] from disk, and using it within a
-[`CookieStoreMutex`]. It then makes a series of requests, examining and modifying the contents
-of the underlying [`cookie_store::CookieStore`] in between.
+The following example demonstrates loading a `cookie_store::CookieStore` from disk, and using it within a
+`CookieStoreMutex`. It then makes a series of requests, examining and modifying the contents
+of the underlying `cookie_store::CookieStore` in between.
 
-```no_run
-# tokio_test::block_on(async {
+```rust
 // Load an existing set of cookies, serialized as json
 let cookie_store = {
   let file = std::fs::File::open("cookies.json")
@@ -72,5 +71,4 @@ client.get("https://google.com").send().await.unwrap();
   let store = cookie_store.lock().unwrap();
   store.save_json(&mut writer).unwrap();
 }
-# });
 ```
