@@ -1,4 +1,4 @@
-[![Documentation](https://docs.rs/cookie_store/badge.svg)](https://docs.rs/reqwest_cookie_store)
+[![Documentation](https://docs.rs/reqwest_cookie_store/badge.svg)](https://docs.rs/reqwest_cookie_store)
 
 `reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [https://crates.io/crates/cookie_store](cookie_store) 
 
