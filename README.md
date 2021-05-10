@@ -1,6 +1,6 @@
 [![Documentation](https://docs.rs/reqwest_cookie_store/badge.svg)](https://docs.rs/reqwest_cookie_store)
 
-`reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [https://crates.io/crates/cookie_store](cookie_store) 
+`reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [cookie_store](https://crates.io/crates/cookie_store).
 
 # Example
 The following example demonstrates loading a `cookie_store::CookieStore` from disk, and using it within a
