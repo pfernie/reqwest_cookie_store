@@ -1,6 +1,6 @@
 [package]
 name = "reqwest_cookie_store"
-version = "0.1.1"
+version = "0.1.2"
 authors = ["Patrick Fernie <patrick.fernie@gmail.com>"]
 edition = "2018"
 description = "A simple crate providing an implementation of the `reqwest::cookie::CookieStore` trait for `cookie_store::CookieStore`"
@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/pfernie/reqwest_cookie_store"
 documentation = "https://docs.rs/reqwest_cookie_store"
 license = "MIT/Apache-2.0"  # https://spdx.org/licenses/
-keywords = ["cookie", "jar", "store", "http"]  # free text
+keywords = ["cookie", "jar", "store", "http", "reqwest"]  # free text
 categories = ["web-programming::http-client", "web-programming"]  # https://crates.io/category_slugs
 # https://doc.rust-lang.org/cargo/reference/manifest.html
 
