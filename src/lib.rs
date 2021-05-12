@@ -101,8 +101,8 @@ fn set_cookies(
 
 fn cookies(cookie_store: &CookieStore, url: &url::Url) -> Option<HeaderValue> {
     let s = cookie_store
-        .get_request_cookies(url)
-        .map(|c| format!("{}={}", c.name(), c.value()))
+        .get_request_values(url)
+        .map(|(name, value)| format!("{}={}", name, value))
         .collect::<Vec<_>>()
         .join("; ");
 
