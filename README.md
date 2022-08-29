@@ -3,7 +3,7 @@
 `reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [cookie_store](https://crates.io/crates/cookie_store).
 
 # Example
-The following example demonstrates loading a `cookie_store::CookieStore` from disk, and using it within a
+The following example demonstrates loading a `cookie_store::CookieStore` (re-exported in this crate) from disk, and using it within a
 `CookieStoreMutex`. It then makes a series of requests, examining and modifying the contents
 of the underlying `cookie_store::CookieStore` in between.
 
@@ -13,7 +13,8 @@ let cookie_store = {
   let file = std::fs::File::open("cookies.json")
       .map(std::io::BufReader::new)
       .unwrap();
-  cookie_store::CookieStore::load_json(file).unwrap()
+  // use re-exported version of `CookieStore` for crate compatibility
+  reqwest_cookie_store::CookieStore::load_json(file).unwrap()
 };
 let cookie_store = reqwest_cookie_store::CookieStoreMutex::new(cookie_store);
 let cookie_store = std::sync::Arc::new(cookie_store);

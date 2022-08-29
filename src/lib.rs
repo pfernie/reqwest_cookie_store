@@ -2,7 +2,7 @@
 #![deny(warnings, missing_debug_implementations, rust_2018_idioms)]
 #![cfg_attr(docsrs, feature(doc_cfg))]
 //! # Example
-//! The following example demonstrates loading a [`cookie_store::CookieStore`] from disk, and using it within a
+//! The following example demonstrates loading a [`cookie_store::CookieStore`] (re-exported in this crate) from disk, and using it within a
 //! [`CookieStoreMutex`]. It then makes a series of requests, examining and modifying the contents
 //! of the underlying [`cookie_store::CookieStore`] in between.
 //! ```no_run
@@ -12,7 +12,8 @@
 //!   let file = std::fs::File::open("cookies.json")
 //!     .map(std::io::BufReader::new)
 //!     .unwrap();
-//!   cookie_store::CookieStore::load_json(file).unwrap()
+//!   // use re-exported version of `CookieStore` for crate compatibility
+//!   reqwest_cookie_store::CookieStore::load_json(file).unwrap()
 //! };
 //! let cookie_store = reqwest_cookie_store::CookieStoreMutex::new(cookie_store);
 //! let cookie_store = std::sync::Arc::new(cookie_store);
@@ -80,7 +81,7 @@ use std::{
 
 use bytes::Bytes;
 use cookie::{Cookie as RawCookie, ParseError as RawCookieParseError};
-use cookie_store::CookieStore;
+pub use cookie_store::CookieStore;
 use reqwest::header::HeaderValue;
 use url;
 
