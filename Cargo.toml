@@ -1,6 +1,6 @@
 [package]
 name = "reqwest_cookie_store"
-version = "0.5.0" # managed by release.sh
+version = "0.6.0" # managed by release.sh
 authors = ["Patrick Fernie <patrick.fernie@gmail.com>"]
 edition = "2018"
 description = "A simple crate providing an implementation of the `reqwest::cookie::CookieStore` trait for `cookie_store::CookieStore`"
