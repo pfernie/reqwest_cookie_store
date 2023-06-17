@@ -9,11 +9,16 @@
 //! # tokio_test::block_on(async {
 //! // Load an existing set of cookies, serialized as json
 //! let cookie_store = {
-//!   let file = std::fs::File::open("cookies.json")
+//!   if let Ok(file) = std::fs::File::open("cookies.json")
 //!     .map(std::io::BufReader::new)
-//!     .unwrap();
-//!   // use re-exported version of `CookieStore` for crate compatibility
-//!   reqwest_cookie_store::CookieStore::load_json(file).unwrap()
+//!     {
+//!       // use re-exported version of `CookieStore` for crate compatibility
+//!       reqwest_cookie_store::CookieStore::load_json(file).unwrap()
+//!     }
+//!     else
+//!     {
+//!       reqwest_cookie_store::CookieStore::new(None)
+//!     }
 //! };
 //! let cookie_store = reqwest_cookie_store::CookieStoreMutex::new(cookie_store);
 //! let cookie_store = std::sync::Arc::new(cookie_store);
