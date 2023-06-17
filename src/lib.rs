@@ -80,8 +80,7 @@ use std::{
 };
 
 use bytes::Bytes;
-use cookie::{Cookie as RawCookie, ParseError as RawCookieParseError};
-pub use cookie_store::CookieStore;
+pub use cookie_store::{CookieStore, RawCookie, RawCookieParseError};
 use reqwest::header::HeaderValue;
 use url;
 
