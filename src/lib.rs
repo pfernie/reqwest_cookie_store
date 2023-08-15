@@ -133,7 +133,7 @@ impl Default for CookieStoreMutex {
 impl CookieStoreMutex {
     /// Create a new [`CookieStoreMutex`] from an existing [`cookie_store::CookieStore`].
     pub const fn new(cookie_store: CookieStore) -> CookieStoreMutex {
-        CookieStoreMutex(Mutex::const_new(cookie_store))
+        CookieStoreMutex(Mutex::new(cookie_store))
     }
 
     /// Lock and get a handle to the contained [`cookie_store::CookieStore`].
