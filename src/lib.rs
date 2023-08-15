@@ -132,8 +132,8 @@ impl Default for CookieStoreMutex {
 
 impl CookieStoreMutex {
     /// Create a new [`CookieStoreMutex`] from an existing [`cookie_store::CookieStore`].
-    pub fn new(cookie_store: CookieStore) -> CookieStoreMutex {
-        CookieStoreMutex(Mutex::new(cookie_store))
+    pub const fn new(cookie_store: CookieStore) -> CookieStoreMutex {
+        CookieStoreMutex(Mutex::const_new(cookie_store))
     }
 
     /// Lock and get a handle to the contained [`cookie_store::CookieStore`].
@@ -175,7 +175,7 @@ impl Default for CookieStoreRwLock {
 
 impl CookieStoreRwLock {
     /// Create a new [`CookieStoreRwLock`] from an existing [`cookie_store::CookieStore`].
-    pub fn new(cookie_store: CookieStore) -> CookieStoreRwLock {
+    pub const fn new(cookie_store: CookieStore) -> CookieStoreRwLock {
         CookieStoreRwLock(RwLock::new(cookie_store))
     }
 
