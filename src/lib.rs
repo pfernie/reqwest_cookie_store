@@ -87,6 +87,8 @@ use std::{
 use bytes::Bytes;
 pub use cookie_store::{CookieStore, RawCookie, RawCookieParseError};
 use reqwest::header::HeaderValue;
+#[cfg(feature = "serde")]
+use serde_derive::{Deserialize, Serialize};
 use url;
 
 fn set_cookies(
@@ -121,6 +123,7 @@ fn cookies(cookie_store: &CookieStore, url: &url::Url) -> Option<HeaderValue> {
 /// A [`cookie_store::CookieStore`] wrapped internally by a [`std::sync::Mutex`], suitable for use in
 /// async/concurrent contexts.
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CookieStoreMutex(Mutex<CookieStore>);
 
 impl Default for CookieStoreMutex {
@@ -164,6 +167,7 @@ impl reqwest::cookie::CookieStore for CookieStoreMutex {
 /// A [`cookie_store::CookieStore`] wrapped internally by a [`std::sync::RwLock`], suitable for use in
 /// async/concurrent contexts.
 #[derive(Debug)]
+#[cfg_attr(feature = "serde", derive(Serialize, Deserialize))]
 pub struct CookieStoreRwLock(RwLock<CookieStore>);
 
 impl Default for CookieStoreRwLock {

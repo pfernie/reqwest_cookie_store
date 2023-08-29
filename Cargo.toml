@@ -16,11 +16,16 @@ categories = ["web-programming::http-client", "web-programming"]  # https://crat
 all-features = true
 rustdoc-args = ["--cfg", "docsrs"]
 
+[features]
+serde = ["dep:serde" , "dep:serde_derive"]
+
 [dependencies]
 bytes = "1.0.1"
 cookie_store = "^0.20"
 reqwest = { version = "^0.11", default-features = false, features = ["cookies"] }
 url = "2.2.2"
+serde = {version = "1.0.147",  optional = true}
+serde_derive = {version = "1.0.147" , optional = true }
 
 [dev-dependencies]
 tokio-test = "0.4.1"
