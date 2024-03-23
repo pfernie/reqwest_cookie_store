@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.7.0] - 2024-03-23
+
+### Miscellaneous Tasks
+
+- Update reqwest to v0.12.0
+
+### Ci
+
+- Remove `--topo-order` argument to `git-cliff`
+
 ## [0.6.0] - 2023-06-17
 
 ### Documentation
