@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.0] - 2024-05-31
+
+### Miscellaneous Tasks
+
+- Update `cookie_store = "^0.21"`
+
 ## [0.7.0] - 2024-03-23
 
 ### Miscellaneous Tasks
