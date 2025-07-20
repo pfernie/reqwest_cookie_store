@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.8.2] - 2025-07-20
+
+### Documentation
+
+- Update README.md with latest doctest example
+
 ## [0.8.1] - 2025-07-20
 
 ### Documentation
