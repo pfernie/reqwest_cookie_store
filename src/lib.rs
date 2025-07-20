@@ -7,16 +7,13 @@
 //! of the underlying [`cookie_store::CookieStore`] in between.
 //! ```
 //! # tokio_test::block_on(async {
-//! // Load an existing set of cookies, serialized as json
+//! // Load an existing set of cookies, serialized as json, if it is available
 //! let cookie_store = {
 //!   if let Ok(file) = std::fs::File::open("cookies.json")
-//!     .map(std::io::BufReader::new)
-//!     {
-//!       // use re-exported version of `CookieStore` for crate compatibility
-//!       reqwest_cookie_store::CookieStore::load_json(file).unwrap()
+//!     .map(std::io::BufReader::new) {
+//!       cookie_store::serde::json::load(file).unwrap()
 //!     }
-//!     else
-//!     {
+//!     else {
 //!       reqwest_cookie_store::CookieStore::new(None)
 //!     }
 //! };
@@ -77,7 +74,7 @@
 //!   //     .unwrap();
 //!   let mut writer = std::io::BufWriter::new(Vec::new());
 //!   let store = cookie_store.lock().unwrap();
-//!   store.save_json(&mut writer).unwrap();
+//!   cookie_store::serde::json::save(&store, &mut writer).unwrap();
 //!   let cookies_json = String::from_utf8(writer.into_inner().unwrap()).unwrap();
 //!   println!("JSON serialization of cookies contents: {cookies_json}");
 //!   assert!(cookies_json.contains("Domain=google.com"));
