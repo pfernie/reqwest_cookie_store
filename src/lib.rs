@@ -5,7 +5,7 @@
 //! The following example demonstrates loading a [`cookie_store::CookieStore`] (re-exported in this crate) from disk, and using it within a
 //! [`CookieStoreMutex`]. It then makes a series of requests, examining and modifying the contents
 //! of the underlying [`cookie_store::CookieStore`] in between.
-//! ```no_run
+//! ```
 //! # tokio_test::block_on(async {
 //! // Load an existing set of cookies, serialized as json
 //! let cookie_store = {
@@ -69,12 +69,18 @@
 //! // Get some new cookies
 //! client.get("https://google.com").send().await.unwrap();
 //! {
-//!   // Write store back to disk
-//!   let mut writer = std::fs::File::create("cookies2.json")
-//!       .map(std::io::BufWriter::new)
-//!       .unwrap();
+//!   // Show serialized contents of the store. Alternatively, using
+//!   // a `std::fs::File` for `writer` could be used to serialize
+//!   // the store to disk:
+//!   // let mut writer = std::fs::File::create("output_cookies.json")
+//!   //     .map(std::io::BufWriter::new)
+//!   //     .unwrap();
+//!   let mut writer = std::io::BufWriter::new(Vec::new());
 //!   let store = cookie_store.lock().unwrap();
 //!   store.save_json(&mut writer).unwrap();
+//!   let cookies_json = String::from_utf8(writer.into_inner().unwrap()).unwrap();
+//!   println!("JSON serialization of cookies contents: {cookies_json}");
+//!   assert!(cookies_json.contains("Domain=google.com"));
 //! }
 //! # });
 //!```
