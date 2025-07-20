@@ -11,13 +11,15 @@ The following example demonstrates loading a `cookie_store::CookieStore` (re-exp
 of the underlying `cookie_store::CookieStore` in between.
 
 ```rust
-// Load an existing set of cookies, serialized as json
+// Load an existing set of cookies, serialized as json, if it is available
 let cookie_store = {
-  let file = std::fs::File::open("cookies.json")
-      .map(std::io::BufReader::new)
-      .unwrap();
-  // use re-exported version of `CookieStore` for crate compatibility
-  reqwest_cookie_store::CookieStore::load_json(file).unwrap()
+  if let Ok(file) = std::fs::File::open("cookies.json")
+    .map(std::io::BufReader::new) {
+      cookie_store::serde::json::load(file).unwrap()
+    }
+    else {
+      reqwest_cookie_store::CookieStore::new(None)
+    }
 };
 let cookie_store = reqwest_cookie_store::CookieStoreMutex::new(cookie_store);
 let cookie_store = std::sync::Arc::new(cookie_store);
@@ -29,13 +31,13 @@ let cookie_store = std::sync::Arc::new(cookie_store);
     println!("{:?}", c);
   }
 }
-
+//!
 // Build a `reqwest` Client, providing the deserialized store
 let client = reqwest::Client::builder()
     .cookie_provider(std::sync::Arc::clone(&cookie_store))
     .build()
     .unwrap();
-
+//!
 // Make a sample request
 client.get("https://google.com").send().await.unwrap();
 {
@@ -46,7 +48,7 @@ client.get("https://google.com").send().await.unwrap();
     println!("{:?}", c);
   }
 }
-
+//!
 // Make another request from another domain
 println!("GET from msn");
 client.get("https://msn.com").send().await.unwrap();
@@ -64,15 +66,21 @@ client.get("https://msn.com").send().await.unwrap();
     println!("{:?}", c);
   }
 }
-
+//!
 // Get some new cookies
 client.get("https://google.com").send().await.unwrap();
 {
-  // Write store back to disk
-  let mut writer = std::fs::File::create("cookies2.json")
-      .map(std::io::BufWriter::new)
-      .unwrap();
+  // Show serialized contents of the store. Alternatively, using
+  // a `std::fs::File` for `writer` could be used to serialize
+  // the store to disk:
+  // let mut writer = std::fs::File::create("output_cookies.json")
+  //     .map(std::io::BufWriter::new)
+  //     .unwrap();
+  let mut writer = std::io::BufWriter::new(Vec::new());
   let store = cookie_store.lock().unwrap();
-  store.save_json(&mut writer).unwrap();
+  cookie_store::serde::json::save(&store, &mut writer).unwrap();
+  let cookies_json = String::from_utf8(writer.into_inner().unwrap()).unwrap();
+  println!("JSON serialization of cookies contents: {cookies_json}");
+  assert!(cookies_json.contains("Domain=google.com"));
 }
 ```
