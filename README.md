@@ -2,6 +2,9 @@
 
 `reqwest_cookie_store` provides implementations of `reqwest::cookie::CookieStore` for [cookie_store](https://crates.io/crates/cookie_store).
 
+This crate is not directly associated with the `reqwest` project, and only provides a convenience implementation for utilizing
+[cookie_store](https://crates.io/crates/cookie_store) with `reqwest`'s traits.
+
 # Example
 The following example demonstrates loading a `cookie_store::CookieStore` (re-exported in this crate) from disk, and using it within a
 `CookieStoreMutex`. It then makes a series of requests, examining and modifying the contents
