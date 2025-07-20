@@ -1,5 +1,24 @@
 # Changelog
 
+## [0.8.1] - 2025-07-20
+
+### Documentation
+
+- Re-enable doctest running
+- Add notice regarding independence from the `reqwest` project
+
+### Miscellaneous Tasks
+
+- Update to edition 2021
+
+### Ci
+
+- Update release.sh to incorporate `cargo-semver-checks`
+
+### Refact
+
+- Update serialization calls to use `cookie_store::serde`
+
 ## [0.8.0] - 2024-05-31
 
 ### Miscellaneous Tasks
