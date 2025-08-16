@@ -14,7 +14,7 @@
 //!       cookie_store::serde::json::load(file).unwrap()
 //!     }
 //!     else {
-//!       reqwest_cookie_store::CookieStore::new(None)
+//!       reqwest_cookie_store::CookieStore::new()
 //!     }
 //! };
 //! let cookie_store = reqwest_cookie_store::CookieStoreMutex::new(cookie_store);
