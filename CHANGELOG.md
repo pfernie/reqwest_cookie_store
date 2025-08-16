@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.9.0] - 2025-08-16
+
+### Miscellaneous Tasks
+
+- Bump cookie_store
+
 ## [0.8.2] - 2025-07-20
 
 ### Documentation
