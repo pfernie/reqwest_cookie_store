@@ -1,5 +1,15 @@
 # Changelog
 
+## [0.10.0] - 2026-01-20
+
+### Bug Fixes
+
+- Update reqwest version in dev-dependencies
+
+### Miscellaneous Tasks
+
+- Update reqwest to v0.13
+
 ## [0.9.0] - 2025-08-16
 
 ### Miscellaneous Tasks
